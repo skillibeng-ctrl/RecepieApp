@@ -5,9 +5,12 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
+<<<<<<< HEAD
   Dimensions,
   useColorScheme,
   Switch,
+=======
+>>>>>>> upstream/master
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { supabase } from "../../lib/supabase";
@@ -16,14 +19,18 @@ import { ThemedView } from "../../components/themed-view";
 import { useThemeColor } from "../../hooks/use-theme-color";
 import { Video } from "expo-av";
 import { WebView } from "react-native-webview";
+<<<<<<< HEAD
 import { LinearGradient } from "expo-linear-gradient";
 
 const { width } = Dimensions.get("window");
+=======
+>>>>>>> upstream/master
 
 export default function RecipeDetail() {
   const { id } = useLocalSearchParams();
   const [recipe, setRecipe] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+<<<<<<< HEAD
   const [isDark, setIsDark] = useState(false);
 
   const systemTheme = useColorScheme();
@@ -42,6 +49,12 @@ export default function RecipeDetail() {
   const customTextColor = darkMode ? "#f5f5f5" : "#333";
   const customAccentColor = darkMode ? "#ff9f43" : "#ff7043";
   const customCardColor = darkMode ? "rgba(40,40,45,0.9)" : "rgba(255,255,255,0.9)";
+=======
+
+  const backgroundColor = useThemeColor({}, "background");
+  const textColor = useThemeColor({}, "text");
+  const tintColor = useThemeColor({}, "tint");
+>>>>>>> upstream/master
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -59,6 +72,7 @@ export default function RecipeDetail() {
     if (id) fetchRecipe();
   }, [id]);
 
+<<<<<<< HEAD
   // Initialize dark mode based on system preference
   useEffect(() => {
     if (systemTheme) {
@@ -71,28 +85,50 @@ export default function RecipeDetail() {
       <View style={[styles.loader, { backgroundColor: customBackground }]}>
         <ActivityIndicator size="large" color={customAccentColor} />
       </View>
+=======
+  if (loading) {
+    return (
+      <ThemedView style={styles.loader}>
+        <ActivityIndicator size="large" color={tintColor} />
+      </ThemedView>
+>>>>>>> upstream/master
     );
   }
 
   if (!recipe) {
     return (
+<<<<<<< HEAD
       <View style={[styles.loader, { backgroundColor: customBackground }]}>
         <ThemedText>No recipe found.</ThemedText>
       </View>
     );
   }
 
+=======
+      <ThemedView style={styles.loader}>
+        <ThemedText>No recipe found.</ThemedText>
+      </ThemedView>
+    );
+  }
+
+  // Format instructions with clearer spacing (split by line breaks or periods)
+>>>>>>> upstream/master
   const formattedInstructions = recipe.instructions
     ? recipe.instructions
         .split(/\r?\n|(?<=\.)\s+/)
         .map((line: string, index: number) => (
+<<<<<<< HEAD
           <ThemedText key={index} style={[styles.text, { color: customTextColor }]}>
+=======
+          <ThemedText key={index} style={[styles.text, { color: textColor }]}>
+>>>>>>> upstream/master
             {line.trim()}
           </ThemedText>
         ))
     : null;
 
   return (
+<<<<<<< HEAD
     <LinearGradient
       colors={
         darkMode
@@ -141,6 +177,16 @@ export default function RecipeDetail() {
         {/* Video Section */}
         {recipe.video_url ? (
           <View style={styles.videoContainer}>
+=======
+    <ThemedView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Recipe Image */}
+        <Image source={{ uri: recipe.image_url }} style={styles.image} />
+
+        {/* Video Section */}
+        {recipe.video_url ? (
+          <ThemedView style={styles.videoContainer}>
+>>>>>>> upstream/master
             {recipe.video_url.includes("youtube.com") ||
             recipe.video_url.includes("youtu.be") ? (
               <WebView
@@ -155,6 +201,7 @@ export default function RecipeDetail() {
                 source={{ uri: recipe.video_url }}
                 style={styles.video}
                 useNativeControls
+<<<<<<< HEAD
                 resizeMode="contain"
               />
             )}
@@ -254,10 +301,40 @@ export default function RecipeDetail() {
         </View>
       </ScrollView>
     </LinearGradient>
+=======
+              />
+            )}
+          </ThemedView>
+        ) : null}
+
+        {/* Recipe Title */}
+        <ThemedText type="title" style={styles.title}>
+          {recipe.title}
+        </ThemedText>
+
+        {/* Ingredients */}
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          Ingredients
+        </ThemedText>
+        <ThemedText style={styles.text}>
+          {recipe.ingredients}
+        </ThemedText>
+
+        {/* Instructions */}
+        <ThemedText type="subtitle" style={styles.sectionTitle}>
+          Instructions
+        </ThemedText>
+        <ThemedView style={styles.instructionsContainer}>
+          {formattedInstructions}
+        </ThemedView>
+      </ScrollView>
+    </ThemedView>
+>>>>>>> upstream/master
   );
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   gradientContainer: { 
     flex: 1 
   },
@@ -420,9 +497,67 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 50,
     shadowColor: "#000",
+=======
+  loader: { flex: 1, justifyContent: "center", alignItems: "center" },
+  container: { flex: 1, padding: 16, marginBottom: 20 },
+  image: {
+    width: "100%",
+    height: 280,
+    borderRadius: 20,
+    marginBottom: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  videoContainer: {
+    marginBottom: 24,
+    borderRadius: 16,
+    overflow: "hidden",
+    shadowColor: "#000",
+>>>>>>> upstream/master
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
+<<<<<<< HEAD
 });
+=======
+  video: {
+    width: "100%",
+    height: 240,
+    borderRadius: 16,
+  },
+  webview: {
+    width: "100%",
+    height: 240,
+    borderRadius: 16,
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "700",
+    marginTop: 24,
+    marginBottom: 12,
+    textTransform: "uppercase",
+    letterSpacing: 1,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 26,
+    marginBottom: 16,
+  },
+  instructionsContainer: {
+    padding: 16,
+    borderRadius: 12,
+    backgroundColor: "rgba(0,0,0,0.05)",
+  },
+});
+>>>>>>> upstream/master

@@ -98,6 +98,7 @@ export default function HomeScreen() {
   }, []);
 
   // Handle search + category filter with debounce
+<<<<<<< HEAD
   useEffect(() => {
     if (searchTimeout.current) {
       clearTimeout(searchTimeout.current);
@@ -253,10 +254,67 @@ export default function HomeScreen() {
       fontWeight: "700",
       opacity: 1,
     },
+=======
+ 
+
+  const styles = StyleSheet.create({
+    container: { flex: 1, backgroundColor, padding: 16 },
+    header: {
+      marginBottom: 16,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    title: {
+      fontSize: 28,
+      fontWeight: "bold",
+      color: textColor,
+      fontFamily: "serif",
+    },
+    subtitle: { fontSize: 14, color: textColor, marginTop: 4 },
+    featuredImage: {
+      width: "100%",
+      height: 200,
+      borderRadius: 16,
+      marginVertical: 16,
+    },
+    overlay: {
+      position: "absolute",
+      bottom: 10,
+      left: 10,
+      backgroundColor: "rgba(0,0,0,0.5)",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 12,
+    },
+    overlayText: { color: "#fff", fontSize: 16, fontWeight: "600" },
+    searchContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      borderWidth: 1.5,
+      borderColor: tintColor,
+      borderRadius: 25,
+      paddingHorizontal: 10,
+      marginVertical: 10,
+    },
+    searchInput: { flex: 1, paddingVertical: 8, color: textColor },
+    categoriesContainer: { marginVertical: 10 },
+    categoryButton: {
+      paddingHorizontal: 16,
+      paddingVertical: 8,
+      marginRight: 8,
+      borderRadius: 20,
+      backgroundColor: backgroundColor === "#fff" ? "#f0f0f0" : "#333",
+    },
+    selectedCategory: { backgroundColor: tintColor },
+    categoryText: { fontSize: 14, color: textColor },
+    selectedCategoryText: { color: "#000" },
+>>>>>>> upstream/master
     grid: {
       flexDirection: "row",
       flexWrap: "wrap",
       justifyContent: "space-between",
+<<<<<<< HEAD
       paddingTop: 8,
       paddingBottom: 30,
     },
@@ -344,12 +402,38 @@ export default function HomeScreen() {
       fontWeight: '800',
       color: textColor,
       letterSpacing: -0.3,
+=======
+    },
+    card: {
+      width: CARD_WIDTH,
+      backgroundColor,
+      borderRadius: 12,
+      marginBottom: 16,
+      shadowColor: "#000",
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    cardImage: {
+      width: "100%",
+      height: 120,
+      borderTopLeftRadius: 12,
+      borderTopRightRadius: 12,
+    },
+    cardTitle: {
+      fontSize: 14,
+      fontWeight: "600",
+      marginVertical: 8,
+      textAlign: "center",
+      color: textColor,
+>>>>>>> upstream/master
     },
   });
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
+<<<<<<< HEAD
       <View style={styles.header}>
         <View>
           <ThemedText style={styles.title}>Food Recipes</ThemedText>
@@ -364,17 +448,35 @@ export default function HomeScreen() {
 
       {/* Featured Image */}
       <Animated.View style={[{ opacity: fadeAnim }, styles.featuredContainer]}>
+=======
+      <ThemedView style={styles.header}>
+        <ThemedText style={styles.title}>Food Recipes</ThemedText>
+        <Ionicons name="settings-outline" size={24} color={textColor} />
+      </ThemedView>
+
+      <ThemedText style={styles.subtitle}>
+        Discover the best recipes from around the world.
+      </ThemedText>
+
+      {/* Featured Image */}
+      <Animated.View style={{ opacity: fadeAnim }}>
+>>>>>>> upstream/master
         <View>
           <Image
             source={{ uri: featuredImages[featuredIndex] }}
             style={styles.featuredImage}
           />
           <View style={styles.overlay}>
+<<<<<<< HEAD
             <ThemedText style={styles.overlayText}>🌟 Featured Recipe</ThemedText>
+=======
+            <ThemedText style={styles.overlayText}>Featured Recipe</ThemedText>
+>>>>>>> upstream/master
           </View>
         </View>
       </Animated.View>
 
+<<<<<<< HEAD
       {/* Featured Image Dots */}
       <View style={styles.featuredDots}>
         {featuredImages.map((_, index) => (
@@ -390,11 +492,19 @@ export default function HomeScreen() {
 
       {/* Search Bar */}
       <View style={styles.searchContainer}>
+=======
+      {/* Search Bar */}
+      <ThemedView style={styles.searchContainer}>
+>>>>>>> upstream/master
         <Ionicons
           name="search"
           size={20}
           color={textColor}
+<<<<<<< HEAD
           style={{ opacity: 0.7 }}
+=======
+          style={{ marginHorizontal: 8 }}
+>>>>>>> upstream/master
         />
         <TextInput
           placeholder="Search recipes..."
@@ -403,6 +513,7 @@ export default function HomeScreen() {
           onChangeText={setSearch}
           placeholderTextColor={textColor}
         />
+<<<<<<< HEAD
         {search.length > 0 && (
           <TouchableOpacity onPress={() => setSearch('')}>
             <Ionicons name="close-circle" size={20} color={textColor} style={{ opacity: 0.7 }} />
@@ -412,6 +523,12 @@ export default function HomeScreen() {
 
       {/* Categories */}
       <View style={styles.categoriesContainer}>
+=======
+      </ThemedView>
+
+      {/* Categories */}
+      <ThemedView style={styles.categoriesContainer}>
+>>>>>>> upstream/master
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {categories.map((cat) => (
             <TouchableOpacity
@@ -433,6 +550,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </ScrollView>
+<<<<<<< HEAD
       </View>
 
       {/* Section Header */}
@@ -451,6 +569,14 @@ export default function HomeScreen() {
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={tintColor} />
           </View>
+=======
+      </ThemedView>
+
+      {/* Recipes Grid */}
+      <ThemedView>
+        {loading ? (
+          <ActivityIndicator size="large" color={tintColor} style={{ marginTop: 20 }} />
+>>>>>>> upstream/master
         ) : (
           <View style={styles.grid}>
             {filteredRecipes.map((item) => (
@@ -458,7 +584,10 @@ export default function HomeScreen() {
                 key={item.id}
                 style={styles.card}
                 onPress={() => router.push(`/recipe/${item.id}` as any)}
+<<<<<<< HEAD
                 activeOpacity={0.9}
+=======
+>>>>>>> upstream/master
               >
                 <Image source={{ uri: item.image_url }} style={styles.cardImage} />
                 <ThemedText style={styles.cardTitle} numberOfLines={2}>
@@ -468,7 +597,14 @@ export default function HomeScreen() {
             ))}
           </View>
         )}
+<<<<<<< HEAD
       </View>
     </ScrollView>
   );
 }
+=======
+      </ThemedView>
+    </ScrollView>
+  );
+}
+>>>>>>> upstream/master
